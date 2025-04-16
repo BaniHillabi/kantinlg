@@ -21,6 +21,14 @@ module.exports = {
       tanggal_akhir: {
         type: Sequelize.DATE
       },
+      stanID : {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'stans',
+          key: 'stanID'
+          },
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
