@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class siswa extends Model {
     /**
@@ -11,35 +9,39 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.user, { foreignKey: 'userID', as: 'users' }); 
+      this.belongsTo(models.user, { foreignKey: "userID" });
+      this.hasMany(models.transaksi, { foreignKey: "siswaID" });
     }
   }
-  siswa.init({
-    siswaID: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: DataTypes.INTEGER
+  siswa.init(
+    {
+      siswaID: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
+      nama_siswa: {
+        type: DataTypes.STRING,
+      },
+      alamat: {
+        type: DataTypes.STRING,
+      },
+      telp: {
+        type: DataTypes.STRING,
+      },
+      userID: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      foto: {
+        type: DataTypes.STRING,
+      },
     },
-    nama_siswa: {
-      type: DataTypes.STRING
-    },
-    alamat: {
-      type: DataTypes.STRING
-    },
-    telp: {
-      type: DataTypes.STRING
-    },
-    userID: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    foto: {
-      type: DataTypes.STRING
-    },
-  }, {
-    sequelize,
-    modelName: 'siswa',
-  });
+    {
+      sequelize,
+      modelName: "siswa",
+    }
+  );
   return siswa;
 };

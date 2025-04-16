@@ -1,8 +1,6 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-const { Sequelize } = require('.');
+"use strict";
+const { Model } = require("sequelize");
+const { Sequelize } = require(".");
 module.exports = (sequelize, DataTypes) => {
   class transaksi extends Model {
     /**
@@ -13,35 +11,43 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.belongsTo(models.stan, {
-        foreignKey: 'stanID', as: 'stans' });
+        foreignKey: "stanID",
+      });
       this.belongsTo(models.siswa, {
-        foreignKey: 'siswaID',  as: 'siswas'});
+        foreignKey: "siswaID",
+      });
+      this.hasMany(models.detail_transaksi, {
+        foreignKey: "transaksiID",
+      });
     }
   }
-  transaksi.init({
-    transaksiID: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: DataTypes.INTEGER
+  transaksi.init(
+    {
+      transaksiID: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
+      tanggal: {
+        type: DataTypes.DATE,
+      },
+      stanID: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      siswaID: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      status: {
+        type: DataTypes.ENUM("belum dikonfirm", "dimasak", "diantar", "sampai"),
+      },
     },
-    tanggal: {
-      type: DataTypes.DATE
-    },
-    stanID: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    siswaID: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    status: {
-      type: DataTypes.ENUM ("belum dikonfirm", "dimasak", "diantar", "sampai")
+    {
+      sequelize,
+      modelName: "transaksi",
     }
-  }, {
-    sequelize,
-    modelName: 'transaksi',
-  });
+  );
   return transaksi;
 };

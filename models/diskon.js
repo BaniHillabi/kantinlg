@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.hasMany (models.diskon, {foreignKey: 'diskonID', as:'diskon'});
+      this.hasMany (models.menu_diskon, {foreignKey: 'diskonID'});
       this.belongsTo (models.stan, {foreignKey: 'stanID', as: 'stans'});
     }
   }
@@ -34,6 +34,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     tanggal_akhir: {
       type: DataTypes.DATE
+    },
+    stanID : {
+      type: DataTypes.INTEGER
     },
   }, {
     sequelize,

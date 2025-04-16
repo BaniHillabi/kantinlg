@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo (models.menu, {foreignKey: 'menuID', as:'menus'});
-      this.belongsTo (models.diskon, {foreignKey: 'diskonID', as:'diskons'});
+      this.belongsTo (models.menu, {foreignKey: 'menuID'});
+      this.belongsTo (models.diskon, {foreignKey: 'diskonID'});
     }
   }
   menu_diskon.init({
